@@ -12,6 +12,7 @@
   --color-background: #f8f6f1;
   --color-surface: #ffffff;
   --color-border: #e4e0d8;
+  --color-border-subtle: #f0ede8;
 
   --color-text-primary: #1a1a1a;
   --color-text-secondary: #6b6863;
@@ -29,6 +30,10 @@
   --radius-sm: 6px;
   --radius-md: 8px;
   --radius-lg: 12px;
+
+  --color-primary: #1a1a1a;
+  --color-secondary: #6b6863;
+  --color-muted-text: #a09d99;
 }
 
 :root {

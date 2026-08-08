@@ -48,70 +48,35 @@ export default function Overview() {
   } = mockData;
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
+    <div className="flex flex-col gap-8">
       {/* SECTION 1 — Hero */}
 
       <div>
-        <p
-          style={{
-            fontSize: "0.8rem",
-            fontWeight: 500,
-            color: "var(--color-text-secondary)",
-            marginBottom: "8px",
-          }}
-        >
+        <p className="text-sm font-medium text-secondary mb-2">
           {greeting}, {name}
         </p>
-        <div style={{ display: "flex", alignItems: "baseline", gap: "16px" }}>
-          <span
-            style={{
-              fontSize: "2.75rem",
-              fontWeight: 700,
-              letterSpacing: "-0.02em",
-              color: "var(--color-text-primary)",
-              lineHeight: 1,
-            }}
-          >
+        <div className="flex items-baseline gap-4">
+          <span className="text-[2.75rem] font-bold tracking-[-0.02em] text-primary leading-none">
             {balance}
           </span>
           <span
-            style={{
-              fontSize: "0.8rem",
-              fontWeight: 600,
-              color: deltaPositive
-                ? "var(--color-positive)"
-                : "var(--color-negative)",
-              backgroundColor: deltaPositive
-                ? "var(--color-positive-subtle)"
-                : "var(--color-negative-subtle)",
-              padding: "4px 10px",
-              borderRadius: "20px",
-            }}
+            className={`text-[0.8rem] font-semibold px-3 py-1 rounded-full ${
+              deltaPositive
+                ? "text-positive bg-positive-subtle"
+                : "text-negative bg-negative-subtle"
+            }`}
           >
             {deltaPositive ? "↑" : "↓"} {delta}
           </span>
         </div>
-        <p
-          style={{
-            fontSize: "0.75rem",
-            fontWeight: 500,
-            color: "var(--color-text-muted)",
-            marginTop: "6px",
-            letterSpacing: "0.01em",
-          }}
-        >
+        <p className="text-xs font-medium text-muted-text mt-1.5 tracking-[0.01em]">
           Available balance
         </p>
       </div>
 
       {/* SECTION 2 — Supporting metrics */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "12px",
-        }}
-      >
+
+      <div className="grid grid-cols-3 gap-3">
         {[
           { label: "Income", value: income, type: "positive" },
           { label: "Expenses", value: expenses, type: "negative" },
@@ -119,35 +84,19 @@ export default function Overview() {
         ].map((metric) => (
           <div
             key={metric.label}
-            style={{
-              backgroundColor: "var(--color-surface)",
-              border: "1px solid var(--color-border)",
-              borderRadius: "8px",
-              padding: "16px 18px",
-            }}
+            className="bg-surface border border-border rounded-lg px-[18px] py-4"
           >
-            <p
-              style={{
-                fontSize: "0.72rem",
-                fontWeight: 500,
-                color: "var(--color-text-muted)",
-                marginBottom: "6px",
-              }}
-            >
+            <p className="text-[0.72rem] font-medium text-muted-text mb-1.5">
               {metric.label}
             </p>
             <p
-              style={{
-                fontSize: "1.25rem",
-                fontWeight: 700,
-                letterSpacing: "-0.01em",
-                color:
-                  metric.type === "positive"
-                    ? "var(--color-positive)"
-                    : metric.type === "negative"
-                      ? "var(--color-negative)"
-                      : "var(--color-text-primary)",
-              }}
+              className={`text-xl font-bold tracking-[-0.01em] ${
+                metric.type === "positive"
+                  ? "text-positive"
+                  : metric.type === "negative"
+                    ? "text-negative"
+                    : "text-primary"
+              }`}
             >
               {metric.value}
             </p>
@@ -156,68 +105,33 @@ export default function Overview() {
       </div>
 
       {/* SECTION 3 — Recent transactions */}
+
       <div>
-        <p
-          style={{
-            fontSize: "0.78rem",
-            fontWeight: 600,
-            color: "var(--color-text-primary)",
-            marginBottom: "12px",
-          }}
-        >
+        <p className="text-[0.78rem] font-semibold text-primary mb-3">
           Recent transactions
         </p>
-        <div
-          style={{
-            backgroundColor: "var(--color-surface)",
-            border: "1px solid var(--color-border)",
-            borderRadius: "8px",
-            overflow: "hidden",
-          }}
-        >
+        <div className="bg-surface border border-border rounded-lg overflow-hidden">
           {transactions.map((tx, index) => (
             <div
               key={tx.id}
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "12px 18px",
-                borderBottom:
-                  index < transactions.length - 1
-                    ? "1px solid #f0ede8"
-                    : "none",
-              }}
+              className={`flex justify-between items-center px-[18px] py-3 ${
+                index < transactions.length - 1
+                  ? "border-b border-border-subtle"
+                  : ""
+              }`}
             >
               <div>
-                <p
-                  style={{
-                    fontSize: "0.82rem",
-                    fontWeight: 500,
-                    color: "var(--color-text-primary)",
-                    margin: 0,
-                  }}
-                >
+                <p className="text-[0.82rem] font-medium text-primary m-0">
                   {tx.name}
                 </p>
-                <p
-                  style={{
-                    fontSize: "0.7rem",
-                    color: "var(--color-text-muted)",
-                    margin: "2px 0 0",
-                  }}
-                >
+                <p className="text-[0.7rem] text-muted-text mt-0.5">
                   {tx.category}
                 </p>
               </div>
               <span
-                style={{
-                  fontSize: "0.85rem",
-                  fontWeight: 600,
-                  color: tx.positive
-                    ? "var(--color-positive)"
-                    : "var(--color-negative)",
-                }}
+                className={`text-[0.85rem] font-semibold ${
+                  tx.positive ? "text-positive" : "text-negative"
+                }`}
               >
                 {tx.amount}
               </span>

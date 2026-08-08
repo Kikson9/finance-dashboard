@@ -3,62 +3,23 @@ import React, { useState } from "react";
 export default function Sidebar() {
   const [activeItem, setActiveItem] = useState("Overview");
   return (
-    <aside
-      style={{
-        width: "240px",
-        minHeight: "100vh",
-        backgroundColor: "var(--color-surface)",
-        borderRight: "1px solid var(--color-border)",
-        display: "flex",
-        flexDirection: "column",
-        padding: "24px 16px",
-      }}
-    >
+    <aside className="w-[240px] min-h-screen bg-surface border-r flex flex-col py-6 px-4">
       {/* Logo */}
-      <div style={{ marginBottom: "32px", paddingLeft: "8px" }}>
-        <span
-          style={{
-            fontWeight: 700,
-            fontSize: "1.1rem",
-            color: "var(--color-accent)",
-          }}
-        >
-          Finna
-        </span>
+      <div className="mb-8 pl-2">
+        <span className="font-bold text-lg text-accent">Finna</span>
       </div>
 
       {/* Nav items */}
-      <nav
-        style={{
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          gap: "4px",
-        }}
-      >
+      <nav className="flex-1 flex flex-col gap-1">
         {["Overview", "Transactions", "Budgets", "Goals"].map((item) => (
           <div
+            className={`py-2 px-3 rounded-md text-sm font-medium cursor-pointer ${
+              item === activeItem
+                ? "text-primary border-l-[3px] border-accent bg-accent-subtle"
+                : "text-secondary border-l-[3px] border-transparent hover:bg-accent-subtle hover:text-primary"
+            }`}
             key={item}
             onClick={() => setActiveItem(item)}
-            style={{
-              padding: "8px 12px",
-              borderRadius: "6px",
-              fontSize: "0.875rem",
-              fontWeight: 500,
-              color:
-                item === activeItem
-                  ? "var(--color-text-primary)"
-                  : "var(--color-text-secondary)",
-              borderLeft:
-                item === activeItem
-                  ? "3px solid var(--color-accent)"
-                  : "3px solid transparent",
-              backgroundColor:
-                item === activeItem
-                  ? "var(--color-accent-subtle)"
-                  : "transparent",
-              cursor: "pointer",
-            }}
           >
             {item}
           </div>
@@ -66,15 +27,7 @@ export default function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div
-        style={{
-          padding: "8px 12px",
-          fontSize: "0.875rem",
-          fontWeight: 500,
-          color: "var(--color-text-secondary)",
-          cursor: "pointer",
-        }}
-      >
+      <div className="py-2 px-3 rounded-md text-sm font-medium cursor-pointer bg-transparent text-secondary border-l-[3px] border-transparent">
         Settings
       </div>
     </aside>

@@ -1,4 +1,3 @@
-// src/mocks/handlers/goals.js
 import { http, HttpResponse } from "msw";
 import { goals } from "../db.js";
 

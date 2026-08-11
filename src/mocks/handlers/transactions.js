@@ -20,9 +20,15 @@ export const transactionHandlers = [
     // Sort newest first
     result.sort((a, b) => new Date(b.date) - new Date(a.date));
 
+    // Enrich each transaction with its full category object
+    const enriched = result.map((t) => ({
+      ...t,
+      category: categories.find((c) => c.id === t.categoryId) ?? null,
+    }));
+
     return HttpResponse.json({
-      data: result,
-      total: result.length,
+      data: enriched,
+      total: enriched.length,
     });
   }),
 
@@ -31,7 +37,13 @@ export const transactionHandlers = [
     if (!txn) {
       return HttpResponse.json({ error: "Not found" }, { status: 404 });
     }
-    return HttpResponse.json({ data: txn });
+
+    const enriched = {
+      ...txn,
+      category: categories.find((c) => c.id === txn.categoryId) ?? null,
+    };
+
+    return HttpResponse.json({ data: enriched });
   }),
 
   http.get("/api/categories", () => {

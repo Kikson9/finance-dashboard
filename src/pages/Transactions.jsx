@@ -37,6 +37,7 @@ export default function Transactions() {
   );
 
   const monthOptions = [
+    { value: "all", label: "All months" },
     { value: "2026-08", label: "August 2026" },
     { value: "2026-07", label: "July 2026" },
   ];
@@ -91,8 +92,10 @@ export default function Transactions() {
       <div className="flex gap-2">
         {/* Month selector */}
         <select
-          value={selectedMonth}
-          onChange={(e) => setSelectedMonth(e.target.value)}
+          value={selectedMonth ?? "all"}
+          onChange={(e) =>
+            setSelectedMonth(e.target.value === "all" ? null : e.target.value)
+          }
           className="text-[0.78rem] font-medium text-primary bg-surface border border-border rounded-lg px-3 py-2 cursor-pointer"
         >
           {monthOptions.map((opt) => (

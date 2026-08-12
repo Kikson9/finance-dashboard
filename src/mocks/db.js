@@ -106,8 +106,8 @@ export const transactions = [
   {
     id: "txn_008",
     date: "2026-07-15",
-    description: "Monthly Stipend - University Research Lab",
-    amount: 1200,
+    description: "Transfer from Linda",
+    amount: 300,
     type: "income",
     categoryId: "cat_income",
     accountId: "acc_checking",

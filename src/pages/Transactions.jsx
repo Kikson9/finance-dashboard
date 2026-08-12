@@ -122,7 +122,7 @@ export default function Transactions() {
 
       {/* TRANSACTION LIST - grouped by date */}
       <div className="flex flex-col gap-4">
-        {groupedDates.length !== 0 ? (
+        {groupedDates.length === 0 ? (
           <p className="text-sm text-muted-text">No transactions found.</p>
         ) : (
           groupedDates.map((date) => (

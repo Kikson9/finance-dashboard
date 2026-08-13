@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useTransactions } from "../hooks/useTransactions";
 import { formatCurrency } from "../utils/format";
+import { SpendingChart } from "@/components/overview/SpendingChart";
 
 const CURRENT_MONTH = new Date().toISOString().slice(0, 7);
 
@@ -8,6 +9,26 @@ export default function Overview() {
   const { transactions, loading, error } = useTransactions({
     month: CURRENT_MONTH,
   });
+
+  const spendingByCategory = useMemo(() => {
+    const expenseMap = {};
+
+    transactions
+      .filter((t) => t.type === "expense")
+      .forEach((t) => {
+        const id = t.categoryId;
+        if (!expenseMap[id]) {
+          expenseMap[id] = {
+            categoryId: id,
+            name: t.category?.name ?? "Other",
+            value: 0,
+          };
+        }
+        expenseMap[id].value += Math.abs(t.amount);
+      });
+
+    return Object.values(expenseMap).sort((a, b) => b.value - a.value);
+  }, [transactions]);
 
   if (loading) {
     return (
@@ -141,6 +162,14 @@ export default function Overview() {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* SECTION 4 - Spending by category */}
+      <div>
+        <p className="text-[0.78rem] font-semibold text-primary mb-3">
+          Spending by category
+        </p>
+        <SpendingChart data={spendingByCategory} />
       </div>
     </div>
   );

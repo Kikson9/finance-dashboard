@@ -29,4 +29,50 @@ export const budgetHandlers = [
 
     return HttpResponse.json({ data: enriched });
   }),
+
+  http.post("/api/budgets", async ({ request }) => {
+    const body = await request.json();
+
+    const newBudget = {
+      id: `bud_${Date.now()}`,
+      categoryId: body.categoryId,
+      limit: Number(body.limit),
+      period: "monthly",
+    };
+
+    budgets.push(newBudget);
+
+    const category = categories.find((c) => c.id === newBudget.categoryId);
+    return HttpResponse.json(
+      {
+        data: { ...newBudget, category, spent: 0, remaining: newBudget.limit },
+      },
+      { status: 201 },
+    );
+  }),
+
+  http.put("/api/budgets/:id", async ({ request, params }) => {
+    const body = await request.json();
+    const index = budgets.findIndex((b) => b.id === params.id);
+
+    if (index === -1) {
+      return HttpResponse.json({ error: "Not found" }, { status: 404 });
+    }
+
+    budgets[index] = { ...budgets[index], limit: Number(body.limit) };
+
+    const category = categories.find((c) => c.id === budgets[index].categoryId);
+    return HttpResponse.json({ data: { ...budgets[index], category } });
+  }),
+
+  http.delete("/api/budgets/:id", ({ params }) => {
+    const index = budgets.findIndex((b) => b.id === params.id);
+
+    if (index === -1) {
+      return HttpResponse.json({ error: "Not found" }, { status: 404 });
+    }
+
+    budgets.splice(index, 1);
+    return HttpResponse.json({ data: null }, { status: 200 });
+  }),
 ];

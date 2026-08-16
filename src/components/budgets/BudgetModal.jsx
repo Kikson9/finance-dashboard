@@ -84,7 +84,7 @@ export function BudgetModal({
                 />
               )}
               <p className="text-[0.88rem] font-semibold text-primary">
-                {isEdit ? budget.category?.name : "New budget"}
+                {isEdit ? modalBudget.category?.name : "New budget"}
               </p>
             </div>
             <button

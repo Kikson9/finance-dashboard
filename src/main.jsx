@@ -9,7 +9,8 @@ import App from "./App.jsx";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: false,
+      retry: 1,
+      retryDelay: 500,
       staleTime: 1000 * 60 * 5,
     },
   },

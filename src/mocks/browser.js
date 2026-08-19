@@ -2,9 +2,11 @@ import { setupWorker } from "msw/browser";
 import { transactionHandlers } from "./handlers/transactions.js";
 import { budgetHandlers } from "./handlers/budgets.js";
 import { goalHandlers } from "./handlers/goals.js";
+import { userHandlers } from "./handlers/user.js";
 
 export const worker = setupWorker(
   ...transactionHandlers,
   ...budgetHandlers,
   ...goalHandlers,
+  ...userHandlers,
 );

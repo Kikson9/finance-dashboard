@@ -42,19 +42,19 @@ export function HealthScoreHero({
         }}
       >
         <div className="w-[52px] h-[52px] rounded-full bg-surface flex flex-col items-center justify-center">
-          <span className="text-base font-semibold" style={{ color }}>
+          <span className="text-lg font-semibold" style={{ color }}>
             {score}
           </span>
-          <span className="text-[8px] text-muted-text">/100</span>
+          <span className="text-[10px] text-muted-text">/100</span>
         </div>
       </div>
 
       <div className="flex-1">
-        <p className="text-[0.68rem] text-muted-text mb-0.5">
+        <p className="text-[0.72rem] text-muted-text mb-0.5">
           Your financial health
         </p>
-        <p className="text-[0.88rem] font-medium text-primary">{label}</p>
-        <p className="text-[0.72rem] text-secondary mt-0.5">{subtext}</p>
+        <p className="text-[0.95rem] font-medium text-primary">{label}</p>
+        <p className="text-[0.78rem] text-secondary mt-0.5">{subtext}</p>
       </div>
     </div>
   );

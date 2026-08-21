@@ -1,4 +1,3 @@
-import { CATEGORY_COLORS } from "@/constants/categories";
 import { formatCurrency } from "@/utils/format";
 
 export function DetectedBills({ bills }) {
@@ -19,28 +18,21 @@ export function DetectedBills({ bills }) {
         </span>
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         {bills.map((bill) => (
           <div
             key={bill.description}
-            className="flex items-center justify-between"
+            className="flex items-center justify-between gap-4"
           >
-            <div className="flex items-center gap-2 min-w-0">
-              <span
-                className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                style={{
-                  backgroundColor:
-                    CATEGORY_COLORS[bill.categoryId] ?? "#d4c5b0",
-                }}
-              />
-              <span className="text-[0.78rem] text-primary truncate">
+            <div className="flex items-baseline gap-2 min-w-0">
+              <span className="text-[0.85rem] text-primary truncate">
                 {bill.description}
               </span>
-              <span className="text-[0.68rem] text-muted-text flex-shrink-0">
-                monthly
+              <span className="text-[0.7rem] text-muted-text flex-shrink-0">
+                {bill.category?.name ?? "monthly"}
               </span>
             </div>
-            <span className="text-[0.78rem] text-secondary flex-shrink-0">
+            <span className="text-[0.85rem] font-medium text-secondary flex-shrink-0">
               {formatCurrency(bill.amount)}
             </span>
           </div>

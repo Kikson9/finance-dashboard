@@ -162,7 +162,7 @@ export default function Overview() {
             {formatCurrency(balance)}
           </p>
           <span
-            className={`text-[0.65rem] font-semibold px-1.5 py-0.5 rounded ${badgeColor}`}
+            className={`text-[0.72rem] font-semibold px-1.5 py-0.5 rounded ${badgeColor}`}
           >
             {badgeArrow} {momChange.percent}% vs last month
           </span>

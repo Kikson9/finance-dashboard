@@ -1,11 +1,19 @@
 import { useState, useMemo } from "react";
 import { useGoals } from "@/hooks/useGoals";
+import { useTransactions } from "@/hooks/useTransactions";
 import { GoalCard } from "@/components/goals/GoalCard";
 import { GoalModal } from "@/components/goals/GoalModal";
 import { formatCurrency } from "@/utils/format";
 
+const CURRENT_MONTH = new Date().toISOString().slice(0, 7);
+
 export default function Goals() {
   const { goals, loading, error, addGoal, updateGoal, deleteGoal } = useGoals();
+
+  // Current month transactions, needed to work out how much the user
+  // could realistically put toward a goal each month. This feeds the
+  // savings simulator inside GoalModal
+  const { transactions } = useTransactions({ month: CURRENT_MONTH });
 
   const [modalGoal, setModalGoal] = useState(null);
 
@@ -22,6 +30,19 @@ export default function Goals() {
 
     return { totalSaved, totalTarget, onTrackCount };
   }, [goals]);
+
+  // Monthly savings capacity, same calculation as Overview uses for the
+  // health score. This is the number the simulator projects goal
+  // completion against
+  const monthlySavingsCapacity = useMemo(() => {
+    const income = transactions
+      .filter((t) => t.type === "income")
+      .reduce((sum, t) => sum + t.amount, 0);
+    const expenses = transactions
+      .filter((t) => t.type === "expense")
+      .reduce((sum, t) => sum + Math.abs(t.amount), 0);
+    return income - expenses;
+  }, [transactions]);
 
   function handleSubmit({ name, targetAmount, currentAmount, deadline }) {
     if (modalGoal === "new") {
@@ -134,6 +155,7 @@ export default function Goals() {
           onClose={() => setModalGoal(null)}
           onSubmit={handleSubmit}
           onDelete={handleDelete}
+          monthlySavingsCapacity={monthlySavingsCapacity}
         />
       )}
     </>

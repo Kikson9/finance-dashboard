@@ -1,7 +1,14 @@
 import { useState, useEffect, useCallback } from "react";
 import { formatCurrency } from "@/utils/format";
+import { simulateGoal } from "@/utils/simulateGoal";
 
-export function GoalModal({ modalGoal, onClose, onSubmit, onDelete }) {
+export function GoalModal({
+  modalGoal,
+  onClose,
+  onSubmit,
+  onDelete,
+  monthlySavingsCapacity,
+}) {
   const isEdit = modalGoal !== null && modalGoal !== "new";
 
   const [name, setName] = useState("");
@@ -73,6 +80,19 @@ export function GoalModal({ modalGoal, onClose, onSubmit, onDelete }) {
         100,
       )
     : 0;
+
+  // Live simulation recalculated as the user edits target, current
+  // amount, or deadline. Only meaningful once all three fields have
+  // values otherwise the math doesn't mean anything yet
+  const simulation =
+    isEdit && targetAmount && deadline
+      ? simulateGoal({
+          currentAmount: Number(currentAmount || 0),
+          targetAmount: Number(targetAmount),
+          deadline,
+          monthlySavingsCapacity,
+        })
+      : null;
 
   return (
     <>
@@ -211,6 +231,52 @@ export function GoalModal({ modalGoal, onClose, onSubmit, onDelete }) {
                   style={{ width: `${progressPercent}%` }}
                 />
               </div>
+            </div>
+          )}
+
+          {/* Savings simulator - edit mode only, needs target and deadline set */}
+          {simulation && (
+            <div className="bg-surface border border-border rounded-lg px-3 py-2.5 flex flex-col gap-1.5">
+              <span className="text-[0.7rem] text-muted-text">
+                At your current pace
+              </span>
+
+              {simulation.status === "complete" && (
+                <p className="text-[0.78rem] font-medium text-[#2d6a4f]">
+                  Goal already reached.
+                </p>
+              )}
+
+              {simulation.status === "stalled" && (
+                <p className="text-[0.78rem] text-secondary">
+                  You are not saving toward this goal this month, so a
+                  projection is not available. You would need to save{" "}
+                  {formatCurrency(simulation.requiredMonthly)} a month to hit
+                  the deadline.
+                </p>
+              )}
+
+              {(simulation.status === "on-pace" ||
+                simulation.status === "behind") && (
+                <>
+                  <p className="text-[0.78rem] text-secondary">
+                    Projected to reach this goal by{" "}
+                    <span className="font-medium text-primary">
+                      {simulation.projectedDate.toLocaleDateString("default", {
+                        month: "long",
+                        year: "numeric",
+                      })}
+                    </span>
+                  </p>
+                  {simulation.status === "behind" && (
+                    <p className="text-[0.72rem] text-amber-700">
+                      That is after your target date. Save{" "}
+                      {formatCurrency(simulation.requiredMonthly)} a month to
+                      stay on track.
+                    </p>
+                  )}
+                </>
+              )}
             </div>
           )}
 

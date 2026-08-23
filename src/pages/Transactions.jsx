@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useTransactions } from "../hooks/useTransactions";
 import { formatCurrency } from "../utils/format";
+import { detectRecurringBills } from "@/utils/detectBills";
 
 const CURRENT_MONTH = new Date().toISOString().slice(0, 7);
 
@@ -11,6 +12,16 @@ export default function Transactions() {
   const { transactions, loading, error } = useTransactions({
     month: selectedMonth,
   });
+
+  // Separate fetch with no month filter, used only to detect recurring
+  // bills across full history. Kept independent from the filtered
+  // transactions below so month/type filters never affect detection.
+  const { transactions: allTransactions } = useTransactions({});
+
+  const recurringDescriptions = useMemo(() => {
+    const bills = detectRecurringBills(allTransactions);
+    return new Set(bills.map((b) => b.description));
+  }, [allTransactions]);
 
   const filtered = transactions.filter((t) => {
     if (selectedType === "all") return true;

@@ -162,9 +162,16 @@ export default function Transactions() {
                     }`}
                   >
                     <div>
-                      <p className="text-[0.82rem] font-medium text-primary">
-                        {tx.description}
-                      </p>
+                      <div className="flex items-center gap-2">
+                        <p className="text-[0.82rem] font-medium text-primary">
+                          {tx.description}
+                        </p>
+                        {recurringDescriptions.has(tx.description) && (
+                          <span className="text-[0.62rem] font-medium text-secondary bg-surface-alt border border-border rounded px-1.5 py-0.5">
+                            Recurring
+                          </span>
+                        )}
+                      </div>
                       <p className="text-[0.7rem] text-muted-text mt-0.5">
                         {tx.category?.name ?? "Uncategorized"}
                       </p>

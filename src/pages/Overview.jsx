@@ -89,8 +89,6 @@ export default function Overview() {
     .reduce((sum, t) => sum + Math.abs(t.amount), 0);
 
   const balance = income - expenses;
-  const savingsRate =
-    income > 0 ? Math.round(((income - expenses) / income) * 100) : 0;
 
   // Month-over-month net comparison for the balance card badge
   // This replaces the old "is balance positive" check with a real
@@ -175,7 +173,14 @@ export default function Overview() {
             value: formatCurrency(expenses),
             type: "negative",
           },
-          { label: "Savings rate", value: `${savingsRate}%`, type: "neutral" },
+          {
+            label: "Savings rate",
+            value:
+              healthScore.savingsRate === null
+                ? "-"
+                : `${healthScore.savingsRate}%`,
+            type: "neutral",
+          },
         ].map((metric) => (
           <div
             key={metric.label}

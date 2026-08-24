@@ -12,6 +12,8 @@ function getSubtext({ score, savingsRate, budgets, goals }) {
   if (overBudgets > 0) {
     return `Solid savings, but ${overBudgets} budget${overBudgets > 1 ? "s" : ""} over limit.`;
   }
+  if (savingsRate === null)
+    return "Log income this month to track your savings rate.";
   if (savingsRate < 15) return "Savings rate is lower than usual this month.";
   return "Steady month with room to build savings.";
 }

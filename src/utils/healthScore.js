@@ -1,4 +1,8 @@
-function scoreSavingsRate(savingsRate) {
+function scoreSavingsRate(income, expenses) {
+  if (income <= 0) return null;
+
+  const savingsRate = ((income - expenses) / income) * 100;
+
   if (savingsRate <= 0) return 0;
   if (savingsRate >= 30) return 100;
   return Math.round((savingsRate / 30) * 100);
@@ -32,10 +36,10 @@ function getLabel(score) {
 }
 
 export function calculateHealthScore({ income, expenses, budgets, goals }) {
-  const savingsRate = income > 0 ? ((income - expenses) / income) * 100 : 0;
+  const savingsRate = income > 0 ? ((income - expenses) / income) * 100 : null;
 
   const components = [
-    { score: scoreSavingsRate(savingsRate), weight: 0.5 },
+    { score: scoreSavingsRate(income, expenses), weight: 0.5 },
     { score: scoreBudgetAdherence(budgets), weight: 0.3 },
     { score: scoreGoalProgress(goals), weight: 0.2 },
   ];
@@ -56,6 +60,6 @@ export function calculateHealthScore({ income, expenses, budgets, goals }) {
   return {
     score: finalScore,
     label: getLabel(finalScore),
-    savingsRate: Math.round(savingsRate),
+    savingsRate: savingsRate === null ? null : Math.round(savingsRate),
   };
 }

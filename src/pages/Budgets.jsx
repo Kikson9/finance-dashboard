@@ -3,6 +3,7 @@ import { useBudgets } from "@/hooks/useBudgets";
 import { useCategories } from "@/hooks/useCategories";
 import { BudgetCard } from "@/components/budgets/BudgetCard";
 import { BudgetModal } from "@/components/budgets/BudgetModal";
+import { ErrorState } from "@/components/ui/ErrorState";
 import { formatCurrency } from "@/utils/format";
 
 const CURRENT_MONTH = new Date().toISOString().slice(0, 7);
@@ -66,11 +67,7 @@ export default function Budgets() {
   }
 
   if (error) {
-    return (
-      <div className="flex flex-col gap-8">
-        <p className="text-sm text-negative">Something went wrong: {error}</p>
-      </div>
-    );
+    return <ErrorState message="Couldn't load your budgets. Try refreshing." />;
   }
 
   return (

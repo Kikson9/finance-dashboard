@@ -3,6 +3,7 @@ import { useTransactions } from "../hooks/useTransactions";
 import { formatCurrency } from "../utils/format";
 import { detectRecurringBills } from "@/utils/detectBills";
 import { ErrorState } from "@/components/ui/ErrorState";
+import { TransactionsSkeleton } from "@/components/transactions/TransactionsSkeleton";
 
 const CURRENT_MONTH = new Date().toISOString().slice(0, 7);
 
@@ -55,11 +56,7 @@ export default function Transactions() {
   ];
 
   if (loading) {
-    return (
-      <div className="flex flex-col gap-6">
-        <p className="text-sm text-muted-text">Loading transactions...</p>
-      </div>
-    );
+    return <TransactionsSkeleton />;
   }
 
   if (error) {

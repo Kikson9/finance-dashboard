@@ -14,6 +14,7 @@ import { detectRecurringBills } from "@/utils/detectBills";
 import { HealthScoreHero } from "@/components/overview/HealthScoreHero";
 import { DetectedBills } from "@/components/overview/DetectedBills";
 import { SpendingChart } from "@/components/overview/SpendingChart";
+import { ErrorState } from "@/components/ui/ErrorState";
 
 const CURRENT_MONTH = new Date().toISOString().slice(0, 7);
 const PREVIOUS_MONTH = getPreviousMonth(CURRENT_MONTH);
@@ -73,9 +74,7 @@ export default function Overview() {
 
   if (error) {
     return (
-      <div className="flex flex-col gap-8">
-        <p className="text-sm text-negative">Something went wrong: {error}</p>
-      </div>
+      <ErrorState message="Couldn't load your overview. Try refreshing." />
     );
   }
 

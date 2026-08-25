@@ -2,6 +2,7 @@ import React, { useState, useMemo } from "react";
 import { useTransactions } from "../hooks/useTransactions";
 import { formatCurrency } from "../utils/format";
 import { detectRecurringBills } from "@/utils/detectBills";
+import { ErrorState } from "@/components/ui/ErrorState";
 
 const CURRENT_MONTH = new Date().toISOString().slice(0, 7);
 
@@ -63,9 +64,7 @@ export default function Transactions() {
 
   if (error) {
     return (
-      <div className="flex flex-col gap-6">
-        <p className="text-sm text-negative">Something went wrong: {error}</p>
-      </div>
+      <ErrorState message="Couldn't load your transactions. Try refreshing." />
     );
   }
 

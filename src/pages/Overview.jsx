@@ -15,6 +15,7 @@ import { HealthScoreHero } from "@/components/overview/HealthScoreHero";
 import { DetectedBills } from "@/components/overview/DetectedBills";
 import { SpendingChart } from "@/components/overview/SpendingChart";
 import { ErrorState } from "@/components/ui/ErrorState";
+import { OverviewSkeleton } from "@/components/overview/OverviewSkeleton";
 
 const CURRENT_MONTH = new Date().toISOString().slice(0, 7);
 const PREVIOUS_MONTH = getPreviousMonth(CURRENT_MONTH);
@@ -65,11 +66,7 @@ export default function Overview() {
   }, [transactions, previousTransactions]);
 
   if (loading) {
-    return (
-      <div className="flex flex-col gap-8">
-        <p className="text-sm text-muted-text">Loading...</p>
-      </div>
-    );
+    return <OverviewSkeleton />;
   }
 
   if (error) {

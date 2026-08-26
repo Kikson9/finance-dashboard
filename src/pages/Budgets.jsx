@@ -4,6 +4,7 @@ import { useCategories } from "@/hooks/useCategories";
 import { BudgetCard } from "@/components/budgets/BudgetCard";
 import { BudgetModal } from "@/components/budgets/BudgetModal";
 import { ErrorState } from "@/components/ui/ErrorState";
+import { BudgetsSkeleton } from "@/components/budgets/BudgetsSkeleton";
 import { formatCurrency } from "@/utils/format";
 
 const CURRENT_MONTH = new Date().toISOString().slice(0, 7);
@@ -59,11 +60,7 @@ export default function Budgets() {
   }
 
   if (loading) {
-    return (
-      <div className="flex flex-col gap-8">
-        <p className="text-sm text-muted-text">Loading...</p>
-      </div>
-    );
+    return <BudgetsSkeleton />;
   }
 
   if (error) {

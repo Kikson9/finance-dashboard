@@ -4,6 +4,7 @@ import { useTransactions } from "@/hooks/useTransactions";
 import { GoalCard } from "@/components/goals/GoalCard";
 import { GoalModal } from "@/components/goals/GoalModal";
 import { ErrorState } from "@/components/ui/ErrorState";
+import { GoalsSkeleton } from "@/components/goals/GoalsSkeleton";
 import { formatCurrency } from "@/utils/format";
 
 const CURRENT_MONTH = new Date().toISOString().slice(0, 7);
@@ -66,11 +67,7 @@ export default function Goals() {
   }
 
   if (loading) {
-    return (
-      <div className="flex flex-col gap-8">
-        <p className="text-sm text-muted-text">Loading...</p>
-      </div>
-    );
+    return <GoalsSkeleton />;
   }
 
   if (error) {

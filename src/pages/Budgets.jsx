@@ -127,26 +127,51 @@ export default function Budgets() {
 
         {/* SECTION 3 - Budget cards */}
         <div>
-          <div className="grid grid-cols-2 gap-3">
-            {budgets.map((budget) => (
-              <BudgetCard
-                key={budget.id}
-                budget={budget}
-                onEdit={setModalBudget}
-              />
-            ))}
+          {budgets.length === 0 && (
+            <div className="text-center mb-4">
+              <p className="text-[0.9rem] font-semibold text-primary mb-1">
+                No budgets set up yet
+              </p>
+              <p className="text-[0.78rem] text-muted-text">
+                Set spending limits by category to keep track of where your
+                money goes.
+              </p>
+            </div>
+          )}
 
-            {/* Empty slot - invite to add */}
-            {availableCategories.length > 0 && (
-              <button
-                onClick={() => setModalBudget("new")}
-                className="border border-dashed border-border rounded-lg px-[18px] py-4 flex flex-col items-center justify-center gap-2 text-muted-text hover:border-border-strong hover:text-secondary transition-colors"
-              >
-                <span className="text-xl">+</span>
-                <span className="text-[0.75rem]">Add a budget</span>
-              </button>
-            )}
-          </div>
+          {budgets.length === 0 ? (
+            availableCategories.length > 0 && (
+              <div className="flex justify-center">
+                <button
+                  onClick={() => setModalBudget("new")}
+                  className="border border-dashed border-border rounded-lg px-[18px] py-4 flex flex-col items-center justify-center gap-2 text-muted-text hover:border-border-strong hover:text-secondary transition-colors w-full max-w-[240px]"
+                >
+                  <span className="text-xl">+</span>
+                  <span className="text-[0.75rem]">Add a budget</span>
+                </button>
+              </div>
+            )
+          ) : (
+            <div className="grid grid-cols-2 gap-3">
+              {budgets.map((budget) => (
+                <BudgetCard
+                  key={budget.id}
+                  budget={budget}
+                  onEdit={setModalBudget}
+                />
+              ))}
+
+              {availableCategories.length > 0 && (
+                <button
+                  onClick={() => setModalBudget("new")}
+                  className="border border-dashed border-border rounded-lg px-[18px] py-4 flex flex-col items-center justify-center gap-2 text-muted-text hover:border-border-strong hover:text-secondary transition-colors"
+                >
+                  <span className="text-xl">+</span>
+                  <span className="text-[0.75rem]">Add a budget</span>
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </div>
 

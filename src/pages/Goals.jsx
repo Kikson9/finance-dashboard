@@ -127,18 +127,43 @@ export default function Goals() {
         </div>
 
         {/* SECTION 3 - Goal cards */}
-        <div className="grid grid-cols-2 gap-3">
-          {goals.map((goal) => (
-            <GoalCard key={goal.id} goal={goal} onEdit={setModalGoal} />
-          ))}
+        <div>
+          {goals.length === 0 && (
+            <div className="text-center mb-4">
+              <p className="text-[0.9rem] font-semibold text-primary mb-1">
+                No savings goals yet
+              </p>
+              <p className="text-[0.78rem] text-muted-text">
+                Set a target and track your progress toward it over time.
+              </p>
+            </div>
+          )}
 
-          <button
-            onClick={() => setModalGoal("new")}
-            className="border border-dashed border-border rounded-lg px-[18px] py-4 flex flex-col items-center justify-center gap-2 text-muted-text hover:border-border-strong hover:text-secondary transition-colors"
-          >
-            <span className="text-xl">+</span>
-            <span className="text-[0.75rem]">Add a goal</span>
-          </button>
+          {goals.length === 0 ? (
+            <div className="flex justify-center">
+              <button
+                onClick={() => setModalGoal("new")}
+                className="border border-dashed border-border rounded-lg px-[18px] py-4 flex flex-col items-center justify-center gap-2 text-muted-text hover:border-border-strong hover:text-secondary transition-colors w-full max-w-[240px]"
+              >
+                <span className="text-xl">+</span>
+                <span className="text-[0.75rem]">Add a goal</span>
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 gap-3">
+              {goals.map((goal) => (
+                <GoalCard key={goal.id} goal={goal} onEdit={setModalGoal} />
+              ))}
+
+              <button
+                onClick={() => setModalGoal("new")}
+                className="border border-dashed border-border rounded-lg px-[18px] py-4 flex flex-col items-center justify-center gap-2 text-muted-text hover:border-border-strong hover:text-secondary transition-colors"
+              >
+                <span className="text-xl">+</span>
+                <span className="text-[0.75rem]">Add a goal</span>
+              </button>
+            </div>
+          )}
         </div>
       </div>
 

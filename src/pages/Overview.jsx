@@ -209,33 +209,44 @@ export default function Overview() {
           Recent transactions
         </p>
         <div className="bg-surface border border-border rounded-lg overflow-hidden">
-          {recentTransactions.map((tx, index) => (
-            <div
-              key={tx.id}
-              className={`flex justify-between items-center px-[18px] py-3 ${
-                index < recentTransactions.length - 1
-                  ? "border-b border-border-subtle"
-                  : ""
-              }`}
-            >
-              <div>
-                <p className="text-[0.82rem] font-medium text-primary m-0">
-                  {tx.description}
-                </p>
-                <p className="text-[0.7rem] text-muted-text mt-0.5">
-                  {tx.category?.name ?? "Uncategorized"}
-                </p>
-              </div>
-              <span
-                className={`text-[0.85rem] font-semibold ${
-                  tx.type === "income" ? "text-positive" : "text-negative"
+          {recentTransactions.length === 0 ? (
+            <div className="flex flex-col items-center text-center gap-1.5 py-10 px-6">
+              <p className="text-[0.85rem] font-medium text-primary">
+                No transactions yet this month
+              </p>
+              <p className="text-[0.78rem] text-muted-text">
+                Your income and expenses will show up here as you add them.
+              </p>
+            </div>
+          ) : (
+            recentTransactions.map((tx, index) => (
+              <div
+                key={tx.id}
+                className={`flex justify-between items-center px-[18px] py-3 ${
+                  index < recentTransactions.length - 1
+                    ? "border-b border-border-subtle"
+                    : ""
                 }`}
               >
-                {tx.type === "income" ? "+" : "-"}
-                {formatCurrency(Math.abs(tx.amount))}
-              </span>
-            </div>
-          ))}
+                <div>
+                  <p className="text-[0.82rem] font-medium text-primary m-0">
+                    {tx.description}
+                  </p>
+                  <p className="text-[0.7rem] text-muted-text mt-0.5">
+                    {tx.category?.name ?? "Uncategorized"}
+                  </p>
+                </div>
+                <span
+                  className={`text-[0.85rem] font-semibold ${
+                    tx.type === "income" ? "text-positive" : "text-negative"
+                  }`}
+                >
+                  {tx.type === "income" ? "+" : "-"}
+                  {formatCurrency(Math.abs(tx.amount))}
+                </span>
+              </div>
+            ))
+          )}
         </div>
       </div>
 

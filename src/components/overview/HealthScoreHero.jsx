@@ -3,6 +3,7 @@ const LABEL_COLORS = {
   Good: "#52b788",
   Fair: "#c9a87c",
   "Needs attention": "#b45309",
+  "Not enough data": "#a09d99",
 };
 
 function getSubtext({ score, savingsRate, budgets, goals }) {

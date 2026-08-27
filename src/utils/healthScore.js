@@ -59,7 +59,7 @@ export function calculateHealthScore({ income, expenses, budgets, goals }) {
 
   return {
     score: finalScore,
-    label: getLabel(finalScore),
+    label: totalWeight === 0 ? "Not enough data" : getLabel(finalScore),
     savingsRate: savingsRate === null ? null : Math.round(savingsRate),
   };
 }

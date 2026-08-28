@@ -21,7 +21,7 @@ export function BudgetCard({ budget, onEdit }) {
       `}
     >
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-1">
         <div className="flex items-center gap-2">
           <span
             className="w-2 h-2 rounded-full flex-shrink-0"
@@ -34,7 +34,7 @@ export function BudgetCard({ budget, onEdit }) {
           </span>
         </div>
 
-        <div className="text-[0.78rem] text-muted-text">
+        <div className="text-[0.78rem] text-muted-text pl-4">
           <span className="font-medium text-primary">
             {formatCurrency(budget.spent)}
           </span>

@@ -89,7 +89,7 @@ export default function Budgets() {
         </div>
 
         {/* SECTION 2 - Summary metrics */}
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           {[
             {
               label: "Total budgeted",
@@ -152,7 +152,7 @@ export default function Budgets() {
               </div>
             )
           ) : (
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {budgets.map((budget) => (
                 <BudgetCard
                   key={budget.id}

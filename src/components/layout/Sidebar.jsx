@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const navItems = [
@@ -12,7 +11,7 @@ export default function Sidebar() {
   const location = useLocation();
 
   return (
-    <aside className="w-[240px] min-h-screen bg-surface border-r flex flex-col py-6 px-4">
+    <aside className="hidden md:flex md:flex-col w-[240px] min-h-screen bg-surface border-r py-6 px-4">
       {/* Logo */}
       <div className="mb-8 pl-2">
         <span className="font-bold text-lg text-accent">Finna</span>

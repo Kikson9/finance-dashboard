@@ -15,7 +15,7 @@ export function OverviewSkeleton() {
       </div>
 
       {/* METRICS GRID */}
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         <div className="bg-surface border border-border rounded-lg px-[16px] py-4">
           <div className="h-2.5 w-12 bg-border rounded mb-2" />
           <div className="h-5 w-16 bg-border rounded mb-2" />
@@ -57,7 +57,7 @@ export function OverviewSkeleton() {
       <div>
         <div className="h-3 w-36 bg-border rounded mb-3" />
         <div className="bg-surface border border-border rounded-lg px-[18px] py-4">
-          <div className="flex gap-6 items-center max-w-md">
+          <div className="flex flex-col items-center gap-4 max-w-md mx-auto md:mx-0 md:flex-row md:gap-6">
             <div className="relative w-40 h-40 flex-shrink-0">
               <div className="w-40 h-40 rounded-full border-[30px] border-border" />
               <div className="absolute inset-0 flex flex-col items-center justify-center">
@@ -66,7 +66,7 @@ export function OverviewSkeleton() {
               </div>
             </div>
 
-            <div className="flex flex-col gap-2.5 min-w-0 flex-1">
+            <div className="flex flex-col gap-2.5 min-w-0 w-full md:w-auto md:flex-1">
               {[0, 1, 2, 3, 4, 5].map((i) => (
                 <div key={i} className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-border flex-shrink-0" />

@@ -147,7 +147,8 @@ export default function Overview() {
       </div>
 
       {/* SECTION 2 - Supporting metrics (balance now lives here, not the hero) */}
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+        {" "}
         <div className="bg-surface border border-border rounded-lg px-[16px] py-4">
           <p className="text-[0.72rem] font-medium text-muted-text mb-1.5">
             Balance
@@ -161,7 +162,6 @@ export default function Overview() {
             {badgeArrow} {momChange.percent}% vs last month
           </span>
         </div>
-
         {[
           { label: "Income", value: formatCurrency(income), type: "positive" },
           {

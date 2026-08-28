@@ -30,7 +30,8 @@ export function SpendingChart({ data }) {
 
   return (
     <div className="bg-surface border border-border rounded-lg px-[18px] py-4">
-      <div className="flex gap-6 items-center max-w-md">
+      <div className="flex flex-col items-center gap-4 max-w-md mx-auto md:mx-0 md:flex-row md:gap-6">
+        {" "}
         <div className="relative w-40 h-40 flex-shrink-0">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
@@ -67,8 +68,7 @@ export function SpendingChart({ data }) {
             </span>
           </div>
         </div>
-
-        <ul className="flex flex-col gap-2.5 min-w-0">
+        <ul className="flex flex-col gap-2.5 min-w-0 w-full md:w-auto">
           {data.map((entry) => (
             <li key={entry.categoryId} className="flex items-center gap-2">
               <span

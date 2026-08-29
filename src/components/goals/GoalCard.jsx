@@ -66,11 +66,11 @@ export function GoalCard({ goal, onEdit }) {
       </div>
 
       {/* Amounts */}
-      <div className="flex items-baseline justify-between">
+      <div className="flex items-baseline gap-1.5 flex-wrap">
         <span className="text-[1.15rem] font-semibold text-primary">
           {formatCurrency(goal.currentAmount)}
         </span>
-        <span className="text-[0.78rem] text-muted-text">
+        <span className="text-[0.78rem] text-muted-text whitespace-nowrap">
           of {formatCurrency(goal.targetAmount)}
         </span>
       </div>
@@ -84,17 +84,17 @@ export function GoalCard({ goal, onEdit }) {
       </div>
 
       {/* Footer */}
-      <div className="flex items-center justify-between">
-        <span className="text-[0.72rem] text-muted-text">
+      <div className="flex items-center justify-between gap-2 flex-wrap">
+        <span className="text-[0.72rem] text-muted-text whitespace-nowrap">
           {goal.percentComplete}% complete
         </span>
         {isComplete ? (
-          <span className="text-[0.72rem] font-medium text-[#2d6a4f]">
+          <span className="text-[0.72rem] font-medium text-[#2d6a4f] whitespace-nowrap">
             Goal reached
           </span>
         ) : (
           <span
-            className={`text-[0.72rem] font-medium ${
+            className={`text-[0.72rem] font-medium whitespace-nowrap ${
               cardStatus === "overdue"
                 ? "text-red-700"
                 : cardStatus === "urgent"

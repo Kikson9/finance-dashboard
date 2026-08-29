@@ -11,7 +11,7 @@ export function GoalsSkeleton() {
       </div>
 
       {/* SUMMARY METRICS */}
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         {[0, 1, 2].map((i) => (
           <div
             key={i}
@@ -24,7 +24,7 @@ export function GoalsSkeleton() {
       </div>
 
       {/* GOAL CARDS */}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {[0, 1, 2, 3].map((i) => (
           <div
             key={i}

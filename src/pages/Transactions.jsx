@@ -151,7 +151,7 @@ export default function Transactions() {
                 {grouped[date].map((tx, index) => (
                   <div
                     key={tx.id}
-                    className={`flex justify-between items-center gap-3 px-[18px] py-3 ${
+                    className={`flex justify-between items-start gap-3 px-[18px] py-3 ${
                       index < grouped[date].length - 1
                         ? "border-b border-border-subtle"
                         : ""

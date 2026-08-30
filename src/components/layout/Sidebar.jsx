@@ -36,11 +36,6 @@ export default function Sidebar() {
           );
         })}
       </nav>
-
-      {/* Footer */}
-      <div className="py-2 px-3 rounded-md text-sm font-medium cursor-pointer text-secondary border-l-[3px] border-transparent hover:bg-accent-subtle hover:text-primary">
-        Settings
-      </div>
     </aside>
   );
 }

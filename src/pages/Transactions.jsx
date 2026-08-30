@@ -96,7 +96,7 @@ export default function Transactions() {
       </div>
 
       {/* FILTER BAR */}
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-wrap">
         {/* Month selector */}
         <select
           value={selectedMonth ?? "all"}
@@ -151,19 +151,19 @@ export default function Transactions() {
                 {grouped[date].map((tx, index) => (
                   <div
                     key={tx.id}
-                    className={`flex justify-between items-center px-[18px] py-3 ${
+                    className={`flex justify-between items-center gap-3 px-[18px] py-3 ${
                       index < grouped[date].length - 1
                         ? "border-b border-border-subtle"
                         : ""
                     }`}
                   >
-                    <div>
-                      <div className="flex items-center gap-2">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2 flex-wrap">
                         <p className="text-[0.82rem] font-medium text-primary">
                           {tx.description}
                         </p>
                         {recurringDescriptions.has(tx.description) && (
-                          <span className="text-[0.62rem] font-medium text-secondary bg-surface-alt border border-border rounded px-1.5 py-0.5">
+                          <span className="text-[0.62rem] font-medium text-secondary bg-surface-alt border border-border rounded px-1.5 py-0.5 whitespace-nowrap">
                             Recurring
                           </span>
                         )}
@@ -173,7 +173,7 @@ export default function Transactions() {
                       </p>
                     </div>
                     <span
-                      className={`text-[0.85rem] font-semibold ${
+                      className={`flex-shrink-0 text-[0.85rem] font-semibold ${
                         tx.type === "income" ? "text-positive" : "text-negative"
                       }`}
                     >

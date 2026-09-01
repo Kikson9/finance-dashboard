@@ -1,6 +1,19 @@
+function relativeDate(monthsAgo, day) {
+  const now = new Date();
+  let year = now.getFullYear();
+  let month = now.getMonth() - monthsAgo; // 0-indexed
+  if (month < 0) {
+    month += 12;
+    year -= 1;
+  }
+  const mm = String(month + 1).padStart(2, "0");
+  const dd = String(day).padStart(2, "0");
+  return `${year}-${mm}-${dd}`;
+}
+
 export const user = {
   id: "user_01",
-  name: "Daniel Rivera",
+  name: "Daniel Simon",
   currency: "USD",
   monthlyIncome: 2400,
 };
@@ -39,10 +52,10 @@ export const categories = [
 ];
 
 export const transactions = [
-  // July 2026
+  // Previous month
   {
     id: "txn_001",
-    date: "2026-07-01",
+    date: relativeDate(1, 1),
     description: "Monthly Stipend - University Research Lab",
     amount: 1200,
     type: "income",
@@ -51,7 +64,7 @@ export const transactions = [
   },
   {
     id: "txn_002",
-    date: "2026-07-01",
+    date: relativeDate(1, 1),
     description: "Rent",
     amount: -750,
     type: "expense",
@@ -60,7 +73,7 @@ export const transactions = [
   },
   {
     id: "txn_003",
-    date: "2026-07-03",
+    date: relativeDate(1, 3),
     description: "Whole Foods",
     amount: -67.43,
     type: "expense",
@@ -69,7 +82,7 @@ export const transactions = [
   },
   {
     id: "txn_004",
-    date: "2026-07-05",
+    date: relativeDate(1, 5),
     description: "Spotify",
     amount: -9.99,
     type: "expense",
@@ -78,7 +91,7 @@ export const transactions = [
   },
   {
     id: "txn_005",
-    date: "2026-07-07",
+    date: relativeDate(1, 7),
     description: "Uber",
     amount: -14.2,
     type: "expense",
@@ -87,7 +100,7 @@ export const transactions = [
   },
   {
     id: "txn_006",
-    date: "2026-07-10",
+    date: relativeDate(1, 10),
     description: "Chipotle",
     amount: -13.85,
     type: "expense",
@@ -96,7 +109,7 @@ export const transactions = [
   },
   {
     id: "txn_007",
-    date: "2026-07-12",
+    date: relativeDate(1, 12),
     description: "Keychron K2 Keyboard",
     amount: -89.99,
     type: "expense",
@@ -105,7 +118,7 @@ export const transactions = [
   },
   {
     id: "txn_008",
-    date: "2026-07-15",
+    date: relativeDate(1, 15),
     description: "Transfer from Linda",
     amount: 300,
     type: "income",
@@ -114,7 +127,7 @@ export const transactions = [
   },
   {
     id: "txn_009",
-    date: "2026-07-17",
+    date: relativeDate(1, 17),
     description: "Netflix",
     amount: -15.49,
     type: "expense",
@@ -123,7 +136,7 @@ export const transactions = [
   },
   {
     id: "txn_010",
-    date: "2026-07-19",
+    date: relativeDate(1, 19),
     description: "Trader Joe's",
     amount: -54.22,
     type: "expense",
@@ -132,7 +145,7 @@ export const transactions = [
   },
   {
     id: "txn_011",
-    date: "2026-07-22",
+    date: relativeDate(1, 22),
     description: "CVS Pharmacy",
     amount: -23.0,
     type: "expense",
@@ -141,7 +154,7 @@ export const transactions = [
   },
   {
     id: "txn_012",
-    date: "2026-07-25",
+    date: relativeDate(1, 25),
     description: "Apple Developer Program",
     amount: -99.0,
     type: "expense",
@@ -150,7 +163,7 @@ export const transactions = [
   },
   {
     id: "txn_013",
-    date: "2026-07-28",
+    date: relativeDate(1, 28),
     description: "Metro Card",
     amount: -33.0,
     type: "expense",
@@ -158,10 +171,10 @@ export const transactions = [
     accountId: "acc_checking",
   },
 
-  // August 2026
+  // Current month
   {
     id: "txn_014",
-    date: "2026-08-01",
+    date: relativeDate(0, 1),
     description: "Monthly Stipend - University Research Lab",
     amount: 1200,
     type: "income",
@@ -170,7 +183,7 @@ export const transactions = [
   },
   {
     id: "txn_015",
-    date: "2026-08-01",
+    date: relativeDate(0, 1),
     description: "Rent",
     amount: -750,
     type: "expense",
@@ -179,7 +192,7 @@ export const transactions = [
   },
   {
     id: "txn_016",
-    date: "2026-08-03",
+    date: relativeDate(0, 3),
     description: "Spotify",
     amount: -9.99,
     type: "expense",
@@ -188,7 +201,7 @@ export const transactions = [
   },
   {
     id: "txn_017",
-    date: "2026-08-04",
+    date: relativeDate(0, 4),
     description: "Whole Foods",
     amount: -72.11,
     type: "expense",
@@ -197,7 +210,7 @@ export const transactions = [
   },
   {
     id: "txn_018",
-    date: "2026-08-06",
+    date: relativeDate(0, 6),
     description: "Lyft",
     amount: -18.4,
     type: "expense",
@@ -206,7 +219,7 @@ export const transactions = [
   },
   {
     id: "txn_019",
-    date: "2026-08-09",
+    date: relativeDate(0, 9),
     description: "Chipotle",
     amount: -12.75,
     type: "expense",
@@ -215,7 +228,7 @@ export const transactions = [
   },
   {
     id: "txn_020",
-    date: "2026-08-10",
+    date: relativeDate(0, 10),
     description: "GitHub Copilot",
     amount: -10.0,
     type: "expense",
@@ -224,7 +237,7 @@ export const transactions = [
   },
   {
     id: "txn_021",
-    date: "2026-08-11",
+    date: relativeDate(0, 11),
     description: "Vercel Pro",
     amount: -20.0,
     type: "expense",
@@ -233,7 +246,7 @@ export const transactions = [
   },
   {
     id: "txn_022",
-    date: "2026-08-11",
+    date: relativeDate(0, 11),
     description: "Amazon - USB-C Hub",
     amount: -34.99,
     type: "expense",
@@ -242,7 +255,7 @@ export const transactions = [
   },
   {
     id: "txn_023",
-    date: "2026-08-12",
+    date: relativeDate(0, 12),
     description: "Freelance Payment - Logo Design",
     amount: 350,
     type: "income",
@@ -251,7 +264,7 @@ export const transactions = [
   },
   {
     id: "txn_024",
-    date: "2026-08-12",
+    date: relativeDate(0, 12),
     description: "Trader Joe's",
     amount: -61.3,
     type: "expense",
@@ -260,7 +273,7 @@ export const transactions = [
   },
   {
     id: "txn_025",
-    date: "2026-08-13",
+    date: relativeDate(0, 13),
     description: "Metro Card",
     amount: -33.0,
     type: "expense",
@@ -269,7 +282,7 @@ export const transactions = [
   },
   {
     id: "txn_026",
-    date: "2026-08-13",
+    date: relativeDate(0, 13),
     description: "Netflix",
     amount: -15.49,
     type: "expense",
@@ -278,7 +291,7 @@ export const transactions = [
   },
   {
     id: "txn_027",
-    date: "2026-08-14",
+    date: relativeDate(0, 14),
     description: "Pharmacy - Cold Medicine",
     amount: -18.75,
     type: "expense",
@@ -287,7 +300,7 @@ export const transactions = [
   },
   {
     id: "txn_028",
-    date: "2026-08-14",
+    date: relativeDate(0, 14),
     description: "McDonald's",
     amount: -16.4,
     type: "expense",
@@ -296,7 +309,7 @@ export const transactions = [
   },
   {
     id: "txn_029",
-    date: "2026-08-14",
+    date: relativeDate(0, 14),
     description: "Uber",
     amount: -11.2,
     type: "expense",
@@ -305,7 +318,7 @@ export const transactions = [
   },
   {
     id: "txn_030",
-    date: "2026-08-14",
+    date: relativeDate(0, 14),
     description: "Notion Pro",
     amount: -16.0,
     type: "expense",

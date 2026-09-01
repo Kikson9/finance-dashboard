@@ -3,6 +3,7 @@ import { useTransactions } from "../hooks/useTransactions";
 import { formatCurrency } from "../utils/format";
 import { detectRecurringBills } from "@/utils/detectBills";
 import { ErrorState } from "@/components/ui/ErrorState";
+import { getPreviousMonth } from "@/utils/compareMonths";
 import { TransactionsSkeleton } from "@/components/transactions/TransactionsSkeleton";
 
 const CURRENT_MONTH = new Date().toISOString().slice(0, 7);
@@ -49,10 +50,20 @@ export default function Transactions() {
     (a, b) => new Date(b) - new Date(a),
   );
 
+  const PREVIOUS_MONTH = getPreviousMonth(CURRENT_MONTH);
+
+  function formatMonthLabel(yearMonth) {
+    const [year, month] = yearMonth.split("-");
+    return new Date(year, month - 1).toLocaleString("default", {
+      month: "long",
+      year: "numeric",
+    });
+  }
+
   const monthOptions = [
     { value: "all", label: "All months" },
-    { value: "2026-08", label: "August 2026" },
-    { value: "2026-07", label: "July 2026" },
+    { value: CURRENT_MONTH, label: formatMonthLabel(CURRENT_MONTH) },
+    { value: PREVIOUS_MONTH, label: formatMonthLabel(PREVIOUS_MONTH) },
   ];
 
   if (loading) {

@@ -11,6 +11,15 @@ function relativeDate(monthsAgo, day) {
   return `${year}-${mm}-${dd}`;
 }
 
+function daysFromNow(days) {
+  const d = new Date();
+  d.setDate(d.getDate() + days);
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 export const user = {
   id: "user_01",
   name: "Daniel Simon",
@@ -346,7 +355,7 @@ export const goals = [
     name: "Emergency Fund",
     targetAmount: 5000,
     currentAmount: 3200,
-    deadline: "2026-12-31",
+    deadline: daysFromNow(180),
     icon: "shield",
   },
   {
@@ -354,7 +363,7 @@ export const goals = [
     name: "New Laptop",
     targetAmount: 1500,
     currentAmount: 620,
-    deadline: "2026-09-01",
+    deadline: daysFromNow(20),
     icon: "laptop",
   },
 ];

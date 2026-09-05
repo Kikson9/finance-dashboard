@@ -54,16 +54,16 @@ Projects when you'll hit a savings goal based on your current monthly savings, s
 
 Clone the repo and install dependencies:
 
-\`\`\`bash
+​`bash
 git clone https://github.com/kikson9/finance-dashboard.git
 cd finance-dashboard
 npm install
-\`\`\`
+​`
 
 Run the dev server:
 
-\`\`\`bash
+​`bash
 npm run dev
-\`\`\`
+​`
 
 The app runs at `http://localhost:5173`. No environment variables or backend setup required, all data is mocked.
